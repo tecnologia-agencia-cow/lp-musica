@@ -51,7 +51,7 @@ export function QuoteForm() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#374151]">E-mail</label>
+            <label className="text-sm font-bold text-[#374151]">E-mail Corporativo</label>
             <input 
               type="email" 
               placeholder="exemplo@email.com.br"
@@ -78,17 +78,29 @@ export function QuoteForm() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#374151]">Quantas unidades você ou seus clientes operam?</label>
+            <label className="text-sm font-bold text-[#374151]">Quantos PDVs sua operação atende hoje?</label>
             <select className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none">
               <option>Escolha uma opção...</option>
-              <option>1 a 5 unidades</option>
-              <option>6 a 20 unidades</option>
-              <option>Mais de 20 unidades</option>
+              <option>1 a 20 PDVs</option>
+              <option>21 a 50 PDVs</option>
+              <option>51 a 100 PDVs</option>
+              <option>Mais de 100 PDVs</option>
             </select>
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#374151]">Como conheceu esta solução?</label>
+            <label className="text-sm font-bold text-[#374151]">Você é:</label>
+            <select className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none">
+              <option>Escolha uma opção...</option>
+              <option>Operador de rádio/mídia</option>
+              <option>Dono/Gestor de estabelecimento</option>
+              <option>Produtor de eventos</option>
+              <option>Outro</option>
+            </select>
+          </div>
+
+          <div className="md:col-span-2 flex flex-col gap-2">
+            <label className="text-sm font-bold text-[#374151]">Como conheceu?</label>
             <select className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none">
               <option>Escolha uma opção...</option>
               <option>Instagram / Facebook</option>
@@ -101,9 +113,9 @@ export function QuoteForm() {
           <div className="md:col-span-2 mt-4">
             <button 
               type="submit"
-              className="w-full bg-[#6332CE] text-white py-5 rounded-[16px] font-bold text-lg hover:bg-[#5225b3] transition-all active:scale-[0.98] cursor-pointer"
+              className="w-full bg-[#6332CE] text-white py-5 rounded-[12px] font-bold text-lg hover:bg-[#5225b3] transition-all active:scale-[0.98] cursor-pointer"
             >
-              Enviar Solicitação
+              Enviar Interesse
             </button>
           </div>
         </form>

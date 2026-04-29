@@ -1,108 +1,89 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShieldCheck, FileText, Music } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
-const benefits = [
-  {
-    title: 'R$ 0 em royalties',
-    desc: 'Acervo 100% livre de direitos autorais de execução pública.',
-    icon: ShieldCheck,
-  },
-  {
-    title: 'Documentação formal',
-    desc: 'Licença emitida por unidade ou por evento — respaldo jurídico completo.',
-    icon: FileText,
-  },
-  {
-    title: 'Dois modelos disponíveis',
-    desc: 'Recorrente mensal por loja ou m² para operações contínuas. Pontual por evento para feiras e exposições.',
-    icon: Music,
-  },
+const otherSegments = [
+  'Redes de varejo e franquias com 20+ unidades',
+  'Redes de hotelaria, alimentação e bares',
+  'Redes de saúde, clínicas e farmácias',
+  'Produtoras de eventos, feiras e exposições',
+  'Redes de academias, studios e bem-estar',
+  'Redes de educação, transportes, coworkings, concessionárias e pet shops',
 ];
 
 export function LicenseSection() {
+  const scrollToContact = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById('contato');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section id="para-quem" className="py-32 bg-[#F5F5F7]">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-20 items-center">
-          {/* Left Column: Text */}
-          <div className="flex-1">
-            <h2 className="text-[42px] font-extrabold text-[#0a0026] mb-10 leading-[1.1]">
-              Licencie um acervo musical <br />
-              livre de direitos autorais e <br />
-              <span className="relative inline-block">
-                <div className="absolute bottom-0 left-0 w-full h-[8px] bg-[#6D28D9]" />
-                <span className="relative">elimine esse custo de vez.</span>
-              </span>
-            </h2>
-            <p className="text-gray-500 text-[18px] leading-relaxed max-w-xl">
-              Nosso acervo é composto por obras de titularidade própria, geridas individualmente pelo titular. O licenciamento é feito de forma direta entre titular e licenciado, conforme assegurado pela Lei 9.610/98 — Lei de Direitos Autorais. Você licencia e entrega ao seu cliente — ou ao seu evento — uma solução de áudio documentada, legal e sem nenhum custo de royalties.
+    <section id="para-quem-e" className="py-32 bg-[#110D26] text-white">
+      <div className="container mx-auto px-4 max-w-5xl">
+        <h2 className="text-[64px] font-bold text-center mb-16 leading-[36px]">
+          Para quem é
+        </h2>
+
+        {/* Main Highlight Card */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative bg-[#1C1638] rounded-r-[16px] overflow-hidden mb-8 flex mx-auto max-w-[936px] min-h-[384px]"
+        >
+          {/* Accent Stripe */}
+          <div className="w-[6px] bg-[#A78BFA] shrink-0" />
+          
+          <div className="p-[56px] flex-1 flex flex-col justify-center">
+            <h3 className="text-3xl md:text-[32px] font-bold mb-6 leading-tight">
+              Operadores de rádio indoor e mídia ambiente
+            </h3>
+            <p className="text-white/70 text-[20px] leading-[28px] mb-6 font-normal">
+              Empresas que operam ambientação musical para múltiplos PDVs e querem oferecer um 
+              diferencial real aos seus clientes — sem repassar a conta do licenciamento mensal.
             </p>
-          </div>
-
-          {/* Right Column: Benefits */}
-          <div className="flex-1 flex flex-col gap-12">
-            {benefits.map((b, idx) => (
-              <div key={idx} className="flex gap-6 items-start">
-                <div className="flex-shrink-0 text-[#6332CE]">
-                  <b.icon size={36} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="text-[20px] font-bold text-[#0a0026] mb-2">{b.title}</h4>
-                  <p className="text-gray-500 leading-relaxed text-[16px]">{b.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Audience Part */}
-        <div className="text-center mt-32 mb-16">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0a0026]">
-            Para quem é esta solução
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {[
-            { title: 'Rádio e mídia indoor', desc: 'Empresas que operam rádio ambiente para redes de lojas e precisam de acervo documentado para seus clientes.' },
-            { title: 'Eventos/feiras', desc: 'Organizadores que querem eliminar o custo de direitos autorais em eventos de qualquer porte.' },
-            { title: 'Varejo em rede', desc: 'Redes de lojas, franquias e multiunidades que precisam de padronização sonora sem custo de royalties.' },
-            { title: 'Academias', desc: 'Redes de academias, studios de pilates e espaços de bem-estar com música ambiente contínua.' },
-            { title: 'Saúde', desc: 'Redes de clínicas, farmácias, consultórios e hospitais que precisam de ambiente sonoro regulado e documentado.' },
-            { title: 'Hotelaria', desc: 'Hotéis, pousadas, restaurantes e redes de alimentação com música ambiente em múltiplas unidades.' }
-          ].map((s, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-white p-8 rounded-xl border-l-[4px] border-[#6D28D9] shadow-sm hover:shadow-md transition-shadow"
+            <p className="text-[#FFFFFF] font-bold text-[20px] leading-[28px] mb-10">
+              Atendemos operações a partir de 20 PDVs ativos, no Brasil e no exterior.
+            </p>
+            
+            <button 
+              onClick={scrollToContact}
+              className="flex items-center justify-start gap-2 bg-[#6B21E0] text-white py-4 px-8 rounded-[12px] hover:bg-[#5b1bc5] transition-all cursor-pointer group h-[60px] w-full md:w-[361.88px] text-left"
             >
-              <h4 className="text-lg font-bold text-[#0a0026] mb-3">{s.title}</h4>
-              <p className="text-gray-500 leading-relaxed text-sm">
-                {s.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+              <span className="whitespace-nowrap font-bold text-[18px] leading-[28px]">Falar com nosso time consultivo</span>
+              <ArrowRight size={20} strokeWidth={3} className="group-hover:translate-x-1 transition-transform shrink-0" />
+            </button>
+          </div>
+        </motion.div>
 
-        {/* Bottom Small Card */}
-        <div className="w-[540px] max-w-full mx-auto h-[159px] bg-white/60 border border-[#E5E7EB] pt-[25px] px-[32px] pb-[32px] rounded-[16px] flex flex-col items-center gap-6">
-          <h5 className="text-center text-sm font-bold text-[#0a0026] tracking-[0.2em] uppercase">
-            Também Atendemos
-          </h5>
-          <div className="grid grid-cols-2 gap-y-4 gap-x-10">
-            {['Restaurantes e bares', 'Supermercados', 'Coworkings', 'Estúdios de Yoga/Pilates'].map((item) => (
-              <div key={item} className="flex items-center gap-3 text-gray-500 text-sm font-semibold whitespace-nowrap">
-                <div className="w-2 h-2 rounded-full bg-[#6D28D9]" />
-                {item}
+        {/* Other Segments Card */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="border border-white/10 rounded-[16px] p-[40px] bg-[#1C163880] mx-auto max-w-[936px] min-h-[270px] backdrop-blur-sm"
+        >
+          <h4 className="text-[#A78BFA] font-bold text-[14px] leading-[20px] tracking-[2.8px] uppercase mb-8">
+            TAMBÉM ATENDEMOS:
+          </h4>
+          
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-4">
+            {otherSegments.map((segment, idx) => (
+              <div key={idx} className="flex items-start gap-3">
+                <CheckCircle2 size={20} className="text-[#A78BFA] shrink-0 mt-0.5" />
+                <p className="text-white/80 text-[16px] leading-[24px]">
+                  {segment}
+                </p>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

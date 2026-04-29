@@ -14,9 +14,9 @@ const testimonials = [
     sub: "Mídia indoor para redes de franquias · Sul do Brasil"
   },
   {
-    text: "“Economia de 90% em relação ao que gastaríamos com taxas de direitos autorais. Mais de R$50.000 economizados em um único evento.”",
-    author: "Cliente",
-    sub: "Feira agropecuária · Sul do Brasil"
+    text: '"Economia de 90% em relação ao que gastaríamos com taxas de direitos autorais. Mais de R$50.000 economizados em um único evento."',
+    author: "Operador",
+    sub: "Mídia Indoor · Brasil"
   }
 ];
 
@@ -35,16 +35,16 @@ export function Testimonials() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-[64px] md:text-[80px] font-black text-white leading-none mb-4"
+            className="text-[48px] md:text-[72px] font-bold text-white leading-tight mb-4"
           >
-            +R$ 3.000.000
+            Multimilhões em economia
           </motion.h2>
-          <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-            em economia gerada com taxas de direitos autorais para nossos parceiros e clientes.
+          <p className="text-[18px] md:text-[20px] text-white/80 max-w-3xl mx-auto leading-relaxed font-medium">
+            gerada para nossos parceiros ao longo de mais de 10 anos atendendo o mercado nacional e internacional. É a economia que você passa a oferecer aos seus clientes ao licenciar nosso acervo.
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-8">
+        <div className="flex flex-col lg:flex-row justify-center items-stretch gap-8 max-w-6xl mx-auto">
           {testimonials.map((t, idx) => (
             <motion.div
               key={idx}
@@ -52,16 +52,16 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="lg:w-[362.67px] lg:h-[250px] bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[16px] flex flex-col justify-between h-full"
+              className="flex-1 min-h-[280px] bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[24px] flex flex-col justify-between"
             >
-              <p className="text-white/90 text-[15px] leading-relaxed italic">
+              <p className="text-white/90 text-[16px] leading-relaxed italic mb-8">
                 {t.text}
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[#6D28D9]" />
                 <div>
-                  <h4 className="text-white text-sm font-bold">{t.author}</h4>
-                  <p className="text-white/50 text-[11px]">{t.sub}</p>
+                  <h4 className="text-white text-[14px] font-bold">{t.author}</h4>
+                  <p className="text-white/50 text-[12px]">{t.sub}</p>
                 </div>
               </div>
             </motion.div>
