@@ -55,9 +55,13 @@ export function Hero() {
                 </button>
                 <Link 
                   href="https://wa.me/your-number"
-                  className="w-full sm:w-auto bg-white text-[#1C1638] px-8 py-3.5 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-3 cursor-pointer"
+                  className="w-full sm:w-auto bg-white text-[#1C1638] px-8 py-3.5 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-3 cursor-pointer overflow-hidden group"
                 >
-                  Falar no WhatsApp <MessageCircle size={24} className="text-[#25D366]" />
+                  <div className="w-8 h-8 rounded-full overflow-hidden border border-gray-100 shrink-0">
+                    <Image src="/images/whatsapp-avatar.jpg" alt="Avatar" width={32} height={32} className="object-cover" />
+                  </div>
+                  <span>Falar no WhatsApp</span>
+                  <MessageCircle size={24} className="text-[#25D366] group-hover:scale-110 transition-transform" />
                 </Link>
               </div>
             </motion.div>

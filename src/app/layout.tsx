@@ -16,8 +16,10 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Música para Eventos | Acervo 100% Livre de Direitos",
-  description: "A solução definitiva para sonorização comercial sem riscos jurídicos, taxas abusivas ou complicações com o ECAD.",
+  description: "Música livre de direitos para operações comerciais com 20+ PDVs. Acervo 100% original, sem taxas mensais de direitos autorais.",
 };
+
+import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 
 export default function RootLayout({
   children,
@@ -28,6 +30,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`scroll-smooth ${publicSans.variable} ${roboto.variable}`}>
       <body className={`${publicSans.className} antialiased`}>
         {children}
+        <WhatsAppWidget />
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import { MessageSquare, Calendar, FileSignature } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function CTA() {
   const scrollToContact = (e: React.MouseEvent) => {
@@ -28,7 +29,9 @@ export function CTA() {
             href="https://wa.me/your-number"
             className="w-full md:w-auto bg-[#22C55E] text-white px-8 py-5 rounded-[12px] font-bold text-[18px] flex items-center justify-center gap-3 hover:bg-[#1db954] transition-all cursor-pointer group"
           >
-            <MessageSquare size={24} className="shrink-0" /> 
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20 shrink-0">
+              <Image src="/images/whatsapp-avatar.jpg" alt="Avatar" width={32} height={32} className="object-cover" />
+            </div>
             <span>Falar no WhatsApp</span>
           </Link>
           
