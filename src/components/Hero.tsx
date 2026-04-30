@@ -1,17 +1,50 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle2, MessageCircle } from 'lucide-react';
 
 export function Hero() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    empresa: '',
+    whatsapp: '',
+    email: '',
+    perfil: '',
+    pdvs: ''
+  });
+
   const handleScroll = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = `*Solicitação de Amostra - Hero*
+---
+*Nome:* ${formData.nome}
+*Empresa:* ${formData.empresa}
+*WhatsApp:* ${formData.whatsapp}
+*E-mail:* ${formData.email}
+*Perfil:* ${formData.perfil}
+*PDVs:* ${formData.pdvs}
+---
+Olá, gostaria de receber a amostra do acervo musical.`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/5551980151245?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -82,34 +115,58 @@ export function Hero() {
             </h3>
             <p className="text-white/70 text-sm mb-6">Atendemos operações a partir de 20 PDVs.</p>
             
-            <form className="flex flex-col gap-2.5 w-full">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 w-full">
               <input 
                 type="text" 
+                name="nome"
+                required
+                value={formData.nome}
+                onChange={handleChange}
                 placeholder="Nome Completo"
                 className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="text" 
+                name="empresa"
+                required
+                value={formData.empresa}
+                onChange={handleChange}
                 placeholder="Empresa"
                 className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="tel" 
+                name="whatsapp"
+                required
+                value={formData.whatsapp}
+                onChange={handleChange}
                 placeholder="WhatsApp"
                 className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="email" 
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="E-mail corporativo"
                 className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="text" 
+                name="perfil"
+                required
+                value={formData.perfil}
+                onChange={handleChange}
                 placeholder="Você é..."
                 className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="text" 
+                name="pdvs"
+                required
+                value={formData.pdvs}
+                onChange={handleChange}
                 placeholder="Quantos PDVs hoje?"
                 className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />

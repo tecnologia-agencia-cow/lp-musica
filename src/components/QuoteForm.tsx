@@ -4,7 +4,42 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export function QuoteForm() {
-  const [tab, setTab] = useState<'recorrente' | 'pontual'>('recorrente');
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    whatsapp: '',
+    empresa: '',
+    pdvs: '',
+    perfil: '',
+    origem: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const message = `*Novo Interesse - Música para Eventos*
+---
+*Modalidade:* ${tab === 'recorrente' ? 'Operação Recorrente' : 'Evento Pontual'}
+*Nome:* ${formData.nome}
+*Empresa:* ${formData.empresa}
+*E-mail:* ${formData.email}
+*WhatsApp:* ${formData.whatsapp}
+*PDVs:* ${formData.pdvs}
+*Perfil:* ${formData.perfil}
+*Como conheceu:* ${formData.origem}
+---
+Olá, gostaria de receber um orçamento para minha operação.`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/5551980151245?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   return (
     <section id="contato" className="py-24 bg-white">
@@ -40,11 +75,15 @@ export function QuoteForm() {
         </div>
 
         {/* Form */}
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-bold text-[#374151]">Seu Nome</label>
             <input 
               type="text" 
+              name="nome"
+              required
+              value={formData.nome}
+              onChange={handleChange}
               placeholder="Nome completo"
               className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all"
             />
@@ -54,6 +93,10 @@ export function QuoteForm() {
             <label className="text-sm font-bold text-[#374151]">E-mail Corporativo</label>
             <input 
               type="email" 
+              name="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
               placeholder="exemplo@email.com.br"
               className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all"
             />
@@ -63,6 +106,10 @@ export function QuoteForm() {
             <label className="text-sm font-bold text-[#374151]">WhatsApp</label>
             <input 
               type="text" 
+              name="whatsapp"
+              required
+              value={formData.whatsapp}
+              onChange={handleChange}
               placeholder="(00) 00000-0000"
               className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all"
             />
@@ -72,6 +119,10 @@ export function QuoteForm() {
             <label className="text-sm font-bold text-[#374151]">Nome da Empresa</label>
             <input 
               type="text" 
+              name="empresa"
+              required
+              value={formData.empresa}
+              onChange={handleChange}
               placeholder="Empresa Ltda"
               className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all"
             />
@@ -79,34 +130,52 @@ export function QuoteForm() {
 
           <div className="flex flex-col gap-2">
             <label className="text-sm font-bold text-[#374151]">Quantos PDVs sua operação atende hoje?</label>
-            <select className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none">
-              <option>Escolha uma opção...</option>
-              <option>1 a 20 PDVs</option>
-              <option>21 a 50 PDVs</option>
-              <option>51 a 100 PDVs</option>
-              <option>Mais de 100 PDVs</option>
+            <select 
+              name="pdvs"
+              required
+              value={formData.pdvs}
+              onChange={handleChange}
+              className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none"
+            >
+              <option value="">Escolha uma opção...</option>
+              <option value="1 a 20 PDVs">1 a 20 PDVs</option>
+              <option value="21 a 50 PDVs">21 a 50 PDVs</option>
+              <option value="51 a 100 PDVs">51 a 100 PDVs</option>
+              <option value="Mais de 100 PDVs">Mais de 100 PDVs</option>
             </select>
           </div>
 
           <div className="flex flex-col gap-2">
             <label className="text-sm font-bold text-[#374151]">Você é:</label>
-            <select className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none">
-              <option>Escolha uma opção...</option>
-              <option>Operador de rádio/mídia</option>
-              <option>Dono/Gestor de estabelecimento</option>
-              <option>Produtor de eventos</option>
-              <option>Outro</option>
+            <select 
+              name="perfil"
+              required
+              value={formData.perfil}
+              onChange={handleChange}
+              className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none"
+            >
+              <option value="">Escolha uma opção...</option>
+              <option value="Operador de rádio/mídia">Operador de rádio/mídia</option>
+              <option value="Dono/Gestor de estabelecimento">Dono/Gestor de estabelecimento</option>
+              <option value="Produtor de eventos">Produtor de eventos</option>
+              <option value="Outro">Outro</option>
             </select>
           </div>
 
           <div className="md:col-span-2 flex flex-col gap-2">
             <label className="text-sm font-bold text-[#374151]">Como conheceu?</label>
-            <select className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none">
-              <option>Escolha uma opção...</option>
-              <option>Instagram / Facebook</option>
-              <option>LinkedIn</option>
-              <option>Google / Pesquisa</option>
-              <option>Indicação</option>
+            <select 
+              name="origem"
+              required
+              value={formData.origem}
+              onChange={handleChange}
+              className="w-full bg-white border border-gray-200 rounded-[12px] px-5 py-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition-all appearance-none"
+            >
+              <option value="">Escolha uma opção...</option>
+              <option value="Instagram / Facebook">Instagram / Facebook</option>
+              <option value="LinkedIn">LinkedIn</option>
+              <option value="Google / Pesquisa">Google / Pesquisa</option>
+              <option value="Indicação">Indicação</option>
             </select>
           </div>
 
