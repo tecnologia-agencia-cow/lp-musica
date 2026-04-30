@@ -54,7 +54,7 @@ export function Hero() {
                   Ouvir o Catálogo <span className="text-xl">→</span>
                 </button>
                 <Link 
-                  href="https://wa.me/your-number"
+                  href="https://wa.me/5551980151245"
                   className="w-full sm:w-auto bg-white text-[#1C1638] px-8 py-3.5 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-3 cursor-pointer overflow-hidden group"
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden border border-gray-100 shrink-0">

@@ -57,7 +57,7 @@ export function WhatsAppWidget() {
             {/* Footer */}
             <div className="p-4 bg-white">
               <a 
-                href="https://wa.me/5511999999999" // TODO: Replace with real number if provided
+                href="https://wa.me/5551980151245"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-[#25D366] text-white py-3 rounded-xl font-bold text-sm hover:bg-[#20bd5b] transition-all"
