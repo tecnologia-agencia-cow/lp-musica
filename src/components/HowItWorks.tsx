@@ -28,7 +28,7 @@ export function HowItWorks() {
           Como funciona
         </h2>
 
-        <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 md:gap-0">
           {steps.map((step, idx) => (
             <motion.div
               key={idx}
