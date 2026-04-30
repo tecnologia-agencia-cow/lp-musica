@@ -27,10 +27,10 @@ export function StatsBar() {
           {stats.map((stat, idx) => (
             <div key={idx} className="flex items-center justify-center w-full md:w-1/4">
               <div className="flex flex-col items-center text-center">
-                <span className="text-white font-bold text-[40px] leading-[50px] whitespace-nowrap">
+                <span className="text-white font-bold text-3xl md:text-[40px] leading-tight md:leading-[50px]">
                   {stat.value}
                 </span>
-                <span className="text-white/80 font-medium text-[14px] leading-[20px] whitespace-nowrap">
+                <span className="text-white/80 font-medium text-xs md:text-[14px] leading-tight md:leading-[20px]">
                   {stat.label}
                 </span>
               </div>

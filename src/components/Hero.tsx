@@ -37,9 +37,9 @@ export function Hero() {
                 para operações com 20+ <br />
                 pontos de venda.
               </h1>
-              <div className="max-w-[529px] h-[181px] mb-8 text-left">
+              <div className="max-w-[529px] mb-8 text-left">
                 <p 
-                  className="text-[24px] text-white/90 leading-[32px] font-medium"
+                  className="text-lg md:text-[24px] text-white/90 leading-relaxed md:leading-[32px] font-medium"
                   style={{ fontFamily: 'var(--font-roboto)' }}
                 >
                   Para operadores de rádio indoor, mídia ambiente, redes de varejo e produtoras de eventos no Brasil e no exterior. Modelo consultivo, documentação completa de uso comercial, sem cobranças mensais de direitos autorais.
@@ -71,52 +71,52 @@ export function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="w-[445.34px] h-[606px] backdrop-blur-[24px] border border-white/10 p-8 pt-10 pb-12 rounded-[16px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] isolate flex flex-col overflow-hidden"
+            className="w-full lg:w-[445.34px] min-h-[606px] backdrop-blur-[24px] border border-white/10 p-6 md:p-8 pt-10 pb-12 rounded-[16px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] isolate flex flex-col overflow-hidden"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
           >
             <h3 
-              className="text-[24px] font-bold text-white mb-2 max-w-[379.33px] h-[32px] leading-[32px]"
+              className="text-[24px] font-bold text-white mb-2 leading-tight"
               style={{ fontFamily: 'var(--font-roboto)' }}
             >
               Receba uma amostra do acervo
             </h3>
             <p className="text-white/70 text-sm mb-6">Atendemos operações a partir de 20 PDVs.</p>
             
-            <form className="flex flex-col gap-2.5">
+            <form className="flex flex-col gap-2.5 w-full">
               <input 
                 type="text" 
                 placeholder="Nome Completo"
-                className="w-[379.33px] h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="text" 
                 placeholder="Empresa"
-                className="w-[379.33px] h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="tel" 
                 placeholder="WhatsApp"
-                className="w-[379.33px] h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="email" 
                 placeholder="E-mail corporativo"
-                className="w-[379.33px] h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="text" 
                 placeholder="Você é..."
-                className="w-[379.33px] h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <input 
                 type="text" 
                 placeholder="Quantos PDVs hoje?"
-                className="w-[379.33px] h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               
               <button 
                 type="submit"
-                className="w-[379.33px] bg-[#7C3AED] text-white py-4 mt-2 rounded-lg font-bold text-lg hover:bg-[#6D28D9] transition-all active:scale-[0.98] cursor-pointer"
+                className="w-full bg-[#7C3AED] text-white py-4 mt-2 rounded-lg font-bold text-lg hover:bg-[#6D28D9] transition-all active:scale-[0.98] cursor-pointer"
               >
                 Receber Amostra
               </button>

@@ -33,7 +33,7 @@ export function ProblemCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-[#6B21E0] px-10 pt-12 pb-16 rounded-[24px] text-white shadow-xl flex flex-col h-[410px]"
+              className="bg-[#6B21E0] px-8 md:px-10 pt-10 md:pt-12 pb-14 md:pb-16 rounded-[24px] text-white shadow-xl flex flex-col min-h-[410px]"
             >
               <div className="mb-6">
                 <problem.icon size={32} className="text-white/90" />

@@ -94,7 +94,7 @@ export function MusicPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="group relative bg-[#2A177A] border border-white/5 p-6 rounded-[16px] h-[174px] hover:bg-[#341d96] transition-all cursor-pointer flex flex-col justify-between"
+              className="group relative bg-[#2A177A] border border-white/5 p-6 rounded-[16px] min-h-[174px] hover:bg-[#341d96] transition-all cursor-pointer flex flex-col justify-between"
             >
               <div className="flex justify-between items-start">
                 <div className="p-3 bg-[#6B21E0] rounded-xl">
