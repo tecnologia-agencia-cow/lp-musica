@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export function QuoteForm() {
+  const [tab, setTab] = useState<'recorrente' | 'pontual'>('recorrente');
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
