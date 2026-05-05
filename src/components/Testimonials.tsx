@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const testimonials = [
   {
-    text: "“Conseguimos uma redução drástica nos custos operacionais da Interaudio ao eliminar as taxas de direitos autorais. O acervo é vasto, de altíssima qualidade e nos dá total segurança jurídica para expandir nossa rede.”",
+    text: "“Com o acervo musicalivrededireitos, zeramos 100% o custo de direito autoral pros nossos clientes. É um divisor de águas na hora de fechar venda.”",
     author: "Edson",
     sub: "Interaudio · Soluções em Áudio",
     image: "/images/testimonials/edson.png"
