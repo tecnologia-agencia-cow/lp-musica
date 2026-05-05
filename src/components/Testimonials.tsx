@@ -2,21 +2,26 @@
 
 import { motion } from 'framer-motion';
 
+import Image from 'next/image';
+
 const testimonials = [
   {
-    text: "“Conseguimos reter clientes que estavam saindo por causa do custo da música ambiente. Hoje entregamos uma solução documentada, com margem melhor para nós.”",
-    author: "Parceiro Licenciado",
-    sub: "Empresa de rádio indoor · São Paulo"
+    text: "“Conseguimos uma redução drástica nos custos operacionais da Interaudio ao eliminar as taxas de direitos autorais. O acervo é vasto, de altíssima qualidade e nos dá total segurança jurídica para expandir nossa rede.”",
+    author: "Edson",
+    sub: "Interaudio · Soluções em Áudio",
+    image: "/images/testimonials/edson.png"
   },
   {
-    text: "“O acervo virou diferencial de vendas. Os clientes pedem para fechar na mesma conversa.”",
-    author: "Parceiro Licenciado",
-    sub: "Mídia indoor para redes de franquias · Sul do Brasil"
+    text: "“A MariSom buscava uma solução que unisse custo-benefício e excelência sonora. Encontramos o parceiro ideal. A documentação é impecável e o licenciamento direto facilitou nossa expansão.”",
+    author: "Renato",
+    sub: "MariSom · Mídia Ambiente",
+    image: "/images/testimonials/marisom-logo.png"
   },
   {
-    text: '"Economia de 90% em relação ao que gastaríamos com taxas de direitos autorais. Mais de R$50.000 economizados em um único evento."',
-    author: "Operador",
-    sub: "Mídia Indoor · Brasil"
+    text: "“A economia de 90% em taxas de direitos autorais foi o ponto de virada para nossa rede. Hoje operamos com 100% de conformidade legal e uma trilha sonora que reforça nossa identidade de marca.”",
+    author: "Parceiro Licenciado",
+    sub: "Rede de Varejo · Brasil",
+    image: null
   }
 ];
 
