@@ -63,7 +63,20 @@ export function Testimonials() {
                 {t.text}
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#6D28D9]" />
+                <div className="w-10 h-10 rounded-full bg-[#6D28D9] overflow-hidden relative shrink-0">
+                  {t.image ? (
+                    <Image 
+                      src={t.image} 
+                      alt={t.author} 
+                      fill 
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white/50 font-bold text-[14px]">
+                      {t.author.charAt(0)}
+                    </div>
+                  )}
+                </div>
                 <div>
                   <h4 className="text-white text-[14px] font-bold">{t.author}</h4>
                   <p className="text-white/50 text-[12px]">{t.sub}</p>
