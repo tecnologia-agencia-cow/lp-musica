@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle2, MessageCircle } from 'lucide-react';
 
 export function Hero() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     nome: '',
     empresa: '',
@@ -44,7 +46,9 @@ Olá, gostaria de receber a amostra do acervo musical.`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5551980151245?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+    
+    // Redirect to success page instead of opening WhatsApp immediately
+    router.push('/sucesso');
   };
 
   return (

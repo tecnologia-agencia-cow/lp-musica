@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 export function QuoteForm() {
+  const router = useRouter();
   const [tab, setTab] = useState<'recorrente' | 'pontual'>('recorrente');
   const [formData, setFormData] = useState({
     nome: '',
@@ -34,7 +36,7 @@ Olá, gostaria de receber um orçamento para minha operação.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5551980151245?text=${encodedMessage}`;
     
-    window.open(whatsappUrl, '_blank');
+    router.push('/sucesso');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
