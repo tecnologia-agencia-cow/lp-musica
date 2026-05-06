@@ -86,19 +86,12 @@ export function SucessoContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex flex-col items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md mb-16"
+            className="inline-flex items-center gap-3 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md mb-16"
           >
-            <div className="flex items-center gap-3 text-lg md:text-xl font-semibold">
-              <Clock className="text-[#7C3AED] animate-pulse" />
-              <span>Você será transferido para um atendente em <span className="text-[#7C3AED] text-2xl font-bold">{countdown}s</span></span>
-            </div>
-            <Link 
-              href="https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra no site MLD e gostaria de falar com um especialista."
-              className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-8 py-3 rounded-full font-bold transition-all flex items-center gap-2 group"
-            >
-              Falar com especialista agora
-              <MessageCircle size={20} className="group-hover:scale-110 transition-transform" />
-            </Link>
+            <Clock className="text-[#7C3AED] animate-pulse" />
+            <span className="text-lg md:text-xl font-semibold">
+              Você será transferido para um atendente em <span className="text-[#7C3AED] text-2xl font-bold">{countdown}s</span>
+            </span>
           </motion.div>
         </div>
       </section>
