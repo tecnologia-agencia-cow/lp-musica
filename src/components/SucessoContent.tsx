@@ -27,7 +27,7 @@ const testimonials = [
 ];
 
 export function SucessoContent() {
-  const [countdown, setCountdown] = useState(5);
+  const [countdown, setCountdown] = useState(30);
 
   useEffect(() => {
     if (countdown > 0) {

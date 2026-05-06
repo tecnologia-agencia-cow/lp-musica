@@ -269,7 +269,7 @@ Olá, gostaria de receber um orçamento para minha operação.`;
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold text-[#374151]">Você é:</label>
+            <label className="text-sm font-bold text-[#374151]">Cargo:</label>
             <div className="relative">
               <select 
                 name="perfil"
