@@ -26,14 +26,45 @@ export function Hero() {
     }
   };
 
+
+  const validateEmail = (email: string) => {
+    const commonDomains = [
+      'gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 
+      'icloud.com', 'live.com', 'msn.com', 'aol.com', 'terra.com.br', 'uol.com.br', 'bol.com.br'
+    ];
+    const domain = email.split('@')[1]?.toLowerCase();
+    return domain && !commonDomains.some(d => domain.includes(d));
+  };
+
+  const formatWhatsApp = (value: string) => {
+    const numbers = value.replace(/\D/g, '');
+    if (numbers.length <= 11) {
+      return numbers
+        .replace(/^(\d{2})(\d)/g, '($1) $2')
+        .replace(/(\d{5})(\d)/, '$1-$2')
+        .replace(/(-\d{4})\d+?$/, '$1');
+    }
+    return value.slice(0, 15);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    let finalValue = value;
+    if (name === 'whatsapp') finalValue = formatWhatsApp(value);
+    setFormData(prev => ({ ...prev, [name]: finalValue }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `*Solicitação de Amostra - Hero*
+    
+    // Simple alert-based validation for Hero to keep it clean, 
+    // or just rely on HTML5 if preferred, but user wanted strictness.
+    if (formData.nome.length < 3) return alert('Por favor, insira seu nome completo.');
+    if (!validateEmail(formData.email)) return alert('Por favor, use um e-mail corporativo.');
+    if (formData.whatsapp.replace(/\D/g, '').length < 10) return alert('Por favor, insira um WhatsApp válido.');
+    if (formData.empresa.length < 2) return alert('Por favor, insira o nome da sua empresa.');
+
+    const message = `*Solicitação de Amostra - LP MLD (Hero)*
 ---
 *Nome:* ${formData.nome}
 *Empresa:* ${formData.empresa}
@@ -59,7 +90,7 @@ Olá, gostaria de receber a amostra do acervo musical.`;
       });
     }
 
-    // Redirect to success page instead of opening WhatsApp immediately
+    // Redirect to success page
     router.push('/sucesso');
   };
 
@@ -103,7 +134,7 @@ Olá, gostaria de receber a amostra do acervo musical.`;
                   Ouvir o Catálogo <span className="text-xl">→</span>
                 </button>
                 <Link 
-                  href="https://wa.me/5551980151245"
+                  href="https://wa.me/5551980151245?text=Olá! Gostaria de falar com um especialista sobre o acervo (Vindo do site MLD)"
                   className="w-full sm:w-auto bg-white text-[#1C1638] px-8 py-3.5 rounded-lg font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-3 cursor-pointer overflow-hidden group"
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden border border-gray-100 shrink-0">

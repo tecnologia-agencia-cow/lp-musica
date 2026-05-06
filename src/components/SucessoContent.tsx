@@ -35,7 +35,7 @@ export function SucessoContent() {
       return () => clearTimeout(timer);
     } else {
       // Redirect to WhatsApp Specialist
-      window.location.href = 'https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra e gostaria de falar com um especialista.';
+      window.location.href = 'https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra no site MLD e gostaria de falar com um especialista.';
     }
   }, [countdown]);
 
@@ -93,7 +93,7 @@ export function SucessoContent() {
               <span>Você será transferido para um atendente em <span className="text-[#7C3AED] text-2xl font-bold">{countdown}s</span></span>
             </div>
             <Link 
-              href="https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra e gostaria de falar com um especialista."
+              href="https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra no site MLD e gostaria de falar com um especialista."
               className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-8 py-3 rounded-full font-bold transition-all flex items-center gap-2 group"
             >
               Falar com especialista agora

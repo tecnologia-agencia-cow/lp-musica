@@ -77,7 +77,7 @@ export function QuoteForm() {
 
     setIsSubmitting(true);
 
-    const message = `*Novo Interesse - Música para Eventos*
+    const message = `*Novo Interesse - LP MLD*
 ---
 *Modalidade:* ${tab === 'recorrente' ? 'Operação Recorrente' : 'Evento Pontual'}
 *Nome:* ${formData.nome}
