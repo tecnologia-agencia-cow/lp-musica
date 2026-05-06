@@ -60,7 +60,7 @@ export function SucessoContent() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight"
           >
-            Recebemos seu pedido <br /> de amostra
+            Recebemos seu pedido de amostra
           </motion.h1>
           
           <motion.p 
@@ -78,7 +78,7 @@ export function SucessoContent() {
             transition={{ delay: 0.15 }}
             className="text-lg text-white/60 mb-12 max-w-2xl mx-auto"
           >
-            Agora, o próximo passo é simples: nosso time vai analisar o seu perfil e preparar uma seleção de músicas ideal para o seu tipo de evento.
+            Agora, o próximo passo é simples: Nosso time vai analisar o seu perfil e preparar uma seleção de músicas ideal para o seu tipo de evento.
           </motion.p>
 
           {/* Counter Banner */}
@@ -117,7 +117,6 @@ export function SucessoContent() {
               <Users size={80} />
             </div>
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <Users className="text-[#7C3AED]" />
               O que acontece agora?
             </h2>
             <ul className="space-y-6 relative z-10">
@@ -142,8 +141,7 @@ export function SucessoContent() {
             className="p-8 rounded-3xl bg-white/5 border border-white/10"
           >
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <Music className="text-[#7C3AED]" />
-              Sobre o acervo
+              🎧 Sobre o acervo
             </h2>
             <ul className="space-y-4">
               {[
@@ -176,7 +174,7 @@ export function SucessoContent() {
               { text: "Produtoras de eventos", icon: Briefcase },
               { text: "Feiras e exposições", icon: Building2 },
               { text: "Eventos corporativos", icon: Users },
-              { text: "Congressos e ativações", icon: TrendingUp }
+              { text: "Congressos e ativações de marca", icon: TrendingUp }
             ].map((item, i) => (
               <motion.div 
                 key={i}
@@ -198,7 +196,9 @@ export function SucessoContent() {
         {/* Logos Section */}
         <section className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Grandes redes e operações já utilizam o acervo:</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 flex items-center justify-center gap-2">
+              🏢 Grandes redes e operações já utilizam o acervo:
+            </h2>
             <p className="text-white/60 max-w-2xl mx-auto">
               Empresas líderes de mercado já utilizam nosso acervo musical para garantir padronização, segurança jurídica e qualidade sonora em suas operações e eventos.
             </p>
@@ -215,8 +215,7 @@ export function SucessoContent() {
         {/* Testimonials */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold mb-12 text-center flex items-center justify-center gap-3">
-            <MessageCircle className="text-[#7C3AED]" />
-            O que dizem nossos clientes
+            💬 O que dizem nossos clientes
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {testimonials.map((t, i) => (

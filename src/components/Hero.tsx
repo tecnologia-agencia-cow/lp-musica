@@ -47,6 +47,18 @@ Olá, gostaria de receber a amostra do acervo musical.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5551980151245?text=${encodedMessage}`;
     
+    // Push to GTM dataLayer
+    if (typeof window !== 'undefined') {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        'event': 'form_submit',
+        'form_id': 'lp-musica-hero',
+        'lead_email': formData.email.toLowerCase().trim(),
+        'form_origin': 'landing_page',
+        'page_path': window.location.pathname
+      });
+    }
+
     // Redirect to success page instead of opening WhatsApp immediately
     router.push('/sucesso');
   };

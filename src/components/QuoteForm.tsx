@@ -36,6 +36,18 @@ Olá, gostaria de receber um orçamento para minha operação.`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/5551980151245?text=${encodedMessage}`;
     
+    // Push to GTM dataLayer
+    if (typeof window !== 'undefined') {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        'event': 'form_submit',
+        'form_id': 'lp-musica-quote',
+        'lead_email': formData.email.toLowerCase().trim(),
+        'form_origin': 'landing_page',
+        'page_path': window.location.pathname
+      });
+    }
+
     router.push('/sucesso');
   };
 
