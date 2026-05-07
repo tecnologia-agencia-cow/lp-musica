@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { SuccessMessage } from './SuccessMessage';
 
 interface FormErrors {
   nome?: string;
@@ -18,6 +19,7 @@ export function QuoteForm() {
   const router = useRouter();
   const [tab, setTab] = useState<'recorrente' | 'pontual'>('recorrente');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   
   const [formData, setFormData] = useState({
@@ -104,7 +106,7 @@ export function QuoteForm() {
         });
       }
 
-      router.push('/sucesso');
+      setIsSubmitted(true);
     } catch (error) {
       console.error('Erro:', error);
       alert('Houve um erro ao enviar sua solicitação. Por favor, tente novamente.');
@@ -147,7 +149,13 @@ export function QuoteForm() {
           Solicite um orçamento agora mesmo!
         </h2>
 
-        {/* Tab Switcher */}
+        {isSubmitted ? (
+          <div className="max-w-[500px] mx-auto">
+            <SuccessMessage />
+          </div>
+        ) : (
+          <>
+            {/* Tab Switcher */}
         <div className="flex justify-center mb-16">
           <div className="bg-gray-100 p-1.5 rounded-[12px] flex items-center w-full max-w-[440px]">
             <button
@@ -337,6 +345,8 @@ export function QuoteForm() {
             </button>
           </div>
         </form>
+          </>
+        )}
       </div>
     </section>
   );

@@ -6,9 +6,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle2, MessageCircle } from 'lucide-react';
+import { SuccessMessage } from './SuccessMessage';
 
 export function Hero() {
   const router = useRouter();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     nome: '',
     empresa: '',
@@ -93,7 +95,7 @@ export function Hero() {
         });
       }
 
-      router.push('/sucesso');
+      setIsSubmitted(true);
     } catch (error) {
       console.error('Erro:', error);
       alert('Houve um erro ao enviar sua solicitação. Por favor, tente novamente.');
@@ -160,77 +162,83 @@ export function Hero() {
             className="w-full lg:w-[445.34px] min-h-[606px] backdrop-blur-[24px] border border-white/10 p-6 md:p-8 pt-10 pb-12 rounded-[16px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] isolate flex flex-col overflow-hidden"
             style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
           >
-            <h3 
-              className="text-[24px] font-bold text-white mb-2 leading-tight"
-              style={{ fontFamily: 'var(--font-roboto)' }}
-            >
-              Receba uma amostra do acervo
-            </h3>
-            <p className="text-white/70 text-sm mb-6">Atendemos operações a partir de 20 PDVs.</p>
-            
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 w-full">
-              <input 
-                type="text" 
-                name="nome"
-                required
-                value={formData.nome}
-                onChange={handleChange}
-                placeholder="Nome Completo"
-                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-              <input 
-                type="text" 
-                name="empresa"
-                required
-                value={formData.empresa}
-                onChange={handleChange}
-                placeholder="Empresa"
-                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-              <input 
-                type="tel" 
-                name="whatsapp"
-                required
-                value={formData.whatsapp}
-                onChange={handleChange}
-                placeholder="WhatsApp"
-                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-              <input 
-                type="email" 
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="E-mail corporativo"
-                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-              <input 
-                type="text" 
-                name="perfil"
-                required
-                value={formData.perfil}
-                onChange={handleChange}
-                placeholder="Cargo"
-                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-              <input 
-                type="text" 
-                name="pdvs"
-                required
-                value={formData.pdvs}
-                onChange={handleChange}
-                placeholder="Quantos PDVs hoje?"
-                className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              />
-              
-              <button 
-                type="submit"
-                className="w-full bg-[#7C3AED] text-white py-4 mt-2 rounded-lg font-bold text-lg hover:bg-[#6D28D9] transition-all active:scale-[0.98] cursor-pointer"
-              >
-                Receber Amostra
-              </button>
-            </form>
+            {isSubmitted ? (
+              <SuccessMessage isDark />
+            ) : (
+              <>
+                <h3 
+                  className="text-[24px] font-bold text-white mb-2 leading-tight"
+                  style={{ fontFamily: 'var(--font-roboto)' }}
+                >
+                  Receba uma amostra do acervo
+                </h3>
+                <p className="text-white/70 text-sm mb-6">Atendemos operações a partir de 20 PDVs.</p>
+                
+                <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 w-full">
+                  <input 
+                    type="text" 
+                    name="nome"
+                    required
+                    value={formData.nome}
+                    onChange={handleChange}
+                    placeholder="Nome Completo"
+                    className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  />
+                  <input 
+                    type="text" 
+                    name="empresa"
+                    required
+                    value={formData.empresa}
+                    onChange={handleChange}
+                    placeholder="Empresa"
+                    className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  />
+                  <input 
+                    type="tel" 
+                    name="whatsapp"
+                    required
+                    value={formData.whatsapp}
+                    onChange={handleChange}
+                    placeholder="WhatsApp"
+                    className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  />
+                  <input 
+                    type="email" 
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="E-mail corporativo"
+                    className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  />
+                  <input 
+                    type="text" 
+                    name="perfil"
+                    required
+                    value={formData.perfil}
+                    onChange={handleChange}
+                    placeholder="Cargo"
+                    className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  />
+                  <input 
+                    type="text" 
+                    name="pdvs"
+                    required
+                    value={formData.pdvs}
+                    onChange={handleChange}
+                    placeholder="Quantos PDVs hoje?"
+                    className="w-full h-[48px] pt-[14px] pb-[15px] px-4 bg-[#FFFFFFCC] border-none rounded-[8px] text-[#4B4B61] font-medium placeholder:text-[#8E8E9C] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                  />
+                  
+                  <button 
+                    type="submit"
+                    className="w-full bg-[#7C3AED] text-white py-4 mt-2 rounded-lg font-bold text-lg hover:bg-[#6D28D9] transition-all active:scale-[0.98] cursor-pointer"
+                  >
+                    Receber Amostra
+                  </button>
+                </form>
+              </>
+            )}
           </motion.div>
         </div>
       </div>
