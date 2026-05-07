@@ -53,9 +53,9 @@ export function LicenseSection() {
             
             <button 
               onClick={scrollToContact}
-              className="flex items-center justify-start gap-2 bg-[#6B21E0] text-white py-4 px-8 rounded-[12px] hover:bg-[#5b1bc5] transition-all cursor-pointer group h-auto md:h-[60px] w-full md:w-[361.88px] text-left"
+              className="flex items-center justify-between gap-4 bg-[#6B21E0] text-white py-4 px-8 rounded-[12px] hover:bg-[#5b1bc5] transition-all cursor-pointer group h-auto md:h-[60px] w-fit text-left shadow-lg shadow-black/20"
             >
-              <span className="font-bold text-[18px] leading-[28px]">Falar com nosso time consultivo</span>
+              <span className="font-bold text-[18px] leading-[28px] whitespace-nowrap">Falar com nosso time consultivo</span>
               <ArrowRight size={20} strokeWidth={3} className="group-hover:translate-x-1 transition-transform shrink-0" />
             </button>
           </div>
