@@ -17,6 +17,9 @@ export async function POST(request: Request) {
       },
     });
 
+    const cleanPhone = whatsapp.replace(/\D/g, '');
+    const waLink = `https://wa.me/${cleanPhone}?text=Olá ${nome}, vi seu interesse no site Música Livre de Direitos. Podemos conversar?`;
+
     const mailOptions = {
       from: `"${nome} via LP MLD" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_RECIPIENT,
@@ -32,7 +35,14 @@ export async function POST(request: Request) {
           <p><strong>PDVs:</strong> ${pdvs}</p>
           <p><strong>Cargo/Perfil:</strong> ${perfil}</p>
           <p><strong>Como conheceu:</strong> ${origem || 'N/A'}</p>
-          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+          
+          <div style="margin-top: 30px; text-align: center;">
+            <a href="${waLink}" style="background-color: #25D366; color: white; padding: 15px 25px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+              Chamar no WhatsApp agora
+            </a>
+          </div>
+
+          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
           <p style="font-size: 12px; color: #777;">Enviado automaticamente pelo site MLD.</p>
         </div>
       `,
