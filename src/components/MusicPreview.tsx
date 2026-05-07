@@ -13,7 +13,8 @@ import {
   PauseCircle,
   Music2,
   X,
-  Volume2
+  Volume2,
+  ListMusic
 } from 'lucide-react';
 
 interface Track {
@@ -110,6 +111,7 @@ export function MusicPreview() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const openPlaylist = (playlist: Playlist) => {
@@ -148,6 +150,7 @@ export function MusicPreview() {
       setIsPlaying(true);
       if (audioRef.current && selectedPlaylist) {
         audioRef.current.src = selectedPlaylist.tracks[idx].url;
+        audioRef.current.volume = volume;
         audioRef.current.play();
       }
     }
@@ -161,11 +164,41 @@ export function MusicPreview() {
     }
   };
 
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = Number(e.target.value);
+    setVolume(v);
+    if (audioRef.current) {
+      audioRef.current.volume = v;
+    }
+  };
+
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  useEffect(() => {
+    if (selectedPlaylist) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedPlaylist]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (isPlaying) {
+        audio.play().catch(err => console.log('Playback error:', err));
+      } else {
+        audio.pause();
+      }
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -252,8 +285,8 @@ export function MusicPreview() {
                   <item.icon size={24} className="text-white" />
                 </div>
                 <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors">
-                  <span className="text-xs font-bold uppercase tracking-widest">{item.tracks.length} {item.tracks.length > 1 ? 'FAIXAS' : 'FAIXA'}</span>
-                  <PlayCircle size={28} className="transform group-hover:scale-110 transition-transform" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest hidden group-hover:inline-block animate-in fade-in slide-in-from-right-1">Ouvir amostras</span>
+                  <ListMusic size={24} className="transform group-hover:scale-110 transition-transform" />
                 </div>
               </div>
               
@@ -275,116 +308,233 @@ export function MusicPreview() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closePlaylist}
-              className="absolute inset-0 bg-[#0a0026]/90 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer"
             />
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-xl bg-[#1E0F5C] border border-white/10 rounded-[24px] shadow-2xl overflow-hidden"
+              exit={{ opacity: 0, scale: 0.95, y: 30 }}
+              className="relative w-full max-w-4xl bg-black border border-white/10 rounded-[12px] shadow-2xl overflow-hidden flex flex-col max-h-[85vh]"
             >
-              {/* Header */}
-              <div className="p-6 md:p-8 border-b border-white/5 flex items-start justify-between bg-gradient-to-br from-white/5 to-transparent">
-                <div className="flex items-center gap-4">
-                  <div className="p-4 bg-[#7C3AED] rounded-2xl shadow-lg">
-                    <selectedPlaylist.icon size={32} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">{selectedPlaylist.title}</h3>
-                    <p className="text-white/50">{selectedPlaylist.genres}</p>
+              {/* Spotify-style Header */}
+              <div className="p-6 md:p-8 flex flex-col md:flex-row items-center md:items-end gap-6 bg-gradient-to-b from-[#7C3AED]/60 to-[#121212]">
+                <motion.div 
+                  layoutId={`icon-${selectedPlaylist.title}`}
+                  className="w-40 h-40 md:w-48 md:h-48 bg-[#7C3AED] rounded-lg shadow-2xl flex items-center justify-center border border-white/5"
+                >
+                  <selectedPlaylist.icon size={80} className="text-white/80" />
+                </motion.div>
+                
+                <div className="flex-1 text-center md:text-left space-y-2">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">Playlist</p>
+                  <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter">
+                    {selectedPlaylist.title.split('para ')[1] || selectedPlaylist.title}
+                  </h3>
+                  <div className="flex items-center justify-center md:justify-start gap-2 text-sm font-medium text-white/60">
+                    <span className="text-white font-bold">Música Livre de Direitos</span>
+                    <span className="w-1 h-1 bg-white/30 rounded-full" />
+                    <span>{selectedPlaylist.tracks.length} músicas</span>
                   </div>
                 </div>
+
                 <button 
                   onClick={closePlaylist}
-                  className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/60 hover:text-white"
+                  className="absolute top-4 right-4 p-2 hover:bg-black/20 rounded-full transition-colors text-white/40 hover:text-white cursor-pointer"
                 >
                   <X size={24} />
                 </button>
               </div>
 
+              {/* Action Bar */}
+              <div className="px-6 py-4 flex items-center gap-6 bg-[#121212]/50">
+                <button 
+                  onClick={() => togglePlayTrack(currentTrackIdx ?? 0)}
+                  className="w-14 h-14 bg-[#7C3AED] rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#7C3AED]/20 group/play cursor-pointer"
+                >
+                  {isPlaying ? (
+                    <PauseCircle size={32} className="text-white" />
+                  ) : (
+                    <PlayCircle size={32} className="text-white translate-x-0.5" />
+                  )}
+                </button>
+                <div className="h-px flex-1 bg-white/5" />
+              </div>
+
               {/* Tracks List */}
-              <div className="p-4 max-h-[50vh] overflow-y-auto custom-scrollbar">
-                <div className="space-y-2">
+              <div className="overflow-y-auto px-2 pb-32 bg-[#121212] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10">
+                <div className="grid grid-cols-[40px_1fr_100px] px-6 py-2 text-xs font-bold uppercase tracking-widest text-white/40 border-b border-white/5 mb-2">
+                  <span>#</span>
+                  <span>Título</span>
+                  <span className="text-right">Ação</span>
+                </div>
+
+                <div className="space-y-0.5">
                   {selectedPlaylist.tracks.map((track, idx) => (
-                    <div 
+                    <motion.div 
                       key={track.id}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 }}
                       onClick={() => togglePlayTrack(idx)}
-                      className={`flex items-center justify-between p-4 rounded-xl cursor-pointer transition-all ${
+                      className={`group grid grid-cols-[40px_1fr_100px] items-center px-6 py-3 rounded-md cursor-pointer transition-colors ${
                         currentTrackIdx === idx 
-                          ? 'bg-[#7C3AED] text-white' 
-                          : 'hover:bg-white/5 text-white/80 hover:text-white'
+                          ? 'bg-white/10' 
+                          : 'hover:bg-white/5'
                       }`}
                     >
-                      <div className="flex items-center gap-4">
-                        <span className={`text-sm font-bold w-4 ${currentTrackIdx === idx ? 'text-white' : 'text-white/20'}`}>
-                          {idx + 1}
-                        </span>
-                        <div>
-                          <p className="font-bold leading-tight">{track.name}</p>
-                          <p className={`text-xs ${currentTrackIdx === idx ? 'text-white/70' : 'text-white/40'}`}>
-                            Amostra de Acervo MLD
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center gap-4">
+                      <div className="text-sm font-medium">
                         {currentTrackIdx === idx && isPlaying ? (
-                          <div className="flex gap-1 items-end h-4">
+                          <div className="flex gap-0.5 items-end h-3 w-4">
                             {[1, 2, 3].map((i) => (
                               <motion.div
                                 key={i}
-                                animate={{ height: [4, 12, 6, 12, 4] }}
-                                transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.15 }}
-                                className="w-1 bg-white rounded-full"
+                                animate={{ height: [3, 10, 5, 10, 3] }}
+                                transition={{ repeat: Infinity, duration: 0.6, delay: i * 0.1 }}
+                                className="w-[3px] bg-[#7C3AED] rounded-full"
                               />
                             ))}
                           </div>
                         ) : (
-                          currentTrackIdx === idx ? <PauseCircle size={24} /> : <PlayCircle size={24} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <span className={`${currentTrackIdx === idx ? 'text-[#7C3AED]' : 'text-white/40 group-hover:hidden'}`}>
+                            {idx + 1}
+                          </span>
+                        )}
+                        {!isPlaying && currentTrackIdx !== idx && (
+                          <PlayCircle size={14} className="hidden group-hover:block text-white" />
+                        )}
+                        {isPlaying && currentTrackIdx === idx && (
+                          <PauseCircle size={14} className="hidden group-hover:block text-white" />
                         )}
                       </div>
-                    </div>
+
+                      <div>
+                        <p className={`font-bold text-sm truncate ${currentTrackIdx === idx ? 'text-[#7C3AED]' : 'text-white'}`}>
+                          {track.name}
+                        </p>
+                        <p className="text-xs text-white/40 font-medium">Música Livre de Direitos</p>
+                      </div>
+
+                      <div className="text-right">
+                        {currentTrackIdx === idx && (
+                          <span className="text-[#7C3AED] text-[10px] font-bold uppercase tracking-widest">
+                            {isPlaying ? 'Tocando' : 'Pausado'}
+                          </span>
+                        )}
+                      </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Footer Player Controls */}
-              {currentTrackIdx !== null && (
-                <div className="p-6 bg-[#7C3AED]/20 border-t border-white/10 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Music2 size={20} className="text-[#25D366] animate-pulse" />
-                      <div>
-                        <p className="text-xs text-white/40 uppercase font-bold tracking-widest">Tocando agora</p>
-                        <p className="text-sm font-bold text-white">{selectedPlaylist.tracks[currentTrackIdx].name}</p>
+              {/* Spotify-style Player Bar */}
+              <AnimatePresence>
+                {currentTrackIdx !== null && (
+                  <motion.div 
+                    initial={{ y: 100 }}
+                    animate={{ y: 0 }}
+                    exit={{ y: 100 }}
+                    className="absolute bottom-0 left-0 right-0 bg-[#181818] border-t border-white/10 px-6 py-4 flex flex-col gap-2 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]"
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      {/* Song Info */}
+                      <div className="flex items-center gap-3 min-w-[180px]">
+                        <div className="w-12 h-12 bg-[#282828] rounded flex items-center justify-center shadow-lg">
+                          <Music2 size={24} className="text-[#7C3AED]" />
+                        </div>
+                        <div className="overflow-hidden">
+                          <p className="text-sm font-bold text-white truncate">{selectedPlaylist.tracks[currentTrackIdx].name}</p>
+                          <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest">Original Mix</p>
+                        </div>
+                      </div>
+
+                      {/* Controls */}
+                      <div className="flex flex-col items-center gap-1 flex-1 max-md:max-w-[200px] max-w-md">
+                        <div className="flex items-center gap-6">
+                          <button 
+                            onClick={() => currentTrackIdx > 0 && togglePlayTrack(currentTrackIdx - 1)}
+                            className="text-white/60 hover:text-white transition-colors cursor-pointer p-2"
+                          >
+                            <PlayCircle size={28} className="rotate-180" />
+                          </button>
+                          <button 
+                            onClick={() => setIsPlaying(!isPlaying)}
+                            className="w-14 h-14 bg-white rounded-full flex items-center justify-center hover:scale-105 transition-transform cursor-pointer shadow-lg"
+                          >
+                            {isPlaying ? (
+                              <PauseCircle size={32} className="text-black" />
+                            ) : (
+                              <PlayCircle size={32} className="text-black translate-x-0.5" />
+                            )}
+                          </button>
+                          <button 
+                            onClick={() => currentTrackIdx < selectedPlaylist.tracks.length - 1 && togglePlayTrack(currentTrackIdx + 1)}
+                            className="text-white/60 hover:text-white transition-colors cursor-pointer p-2"
+                          >
+                            <PlayCircle size={28} />
+                          </button>
+                        </div>
+
+                        {/* Seek Bar */}
+                        <div className="w-full flex items-center gap-2 group">
+                          <span className="text-[10px] text-white/40 font-medium min-w-[30px] text-right">
+                            {formatTime(currentTime)}
+                          </span>
+                          <div className="relative flex-1 h-1 flex items-center">
+                            <input 
+                              type="range"
+                              min={0}
+                              max={duration || 0}
+                              value={currentTime}
+                              onChange={handleSeek}
+                              className="absolute inset-0 w-full h-1 bg-white/20 rounded-full appearance-none cursor-pointer z-10 accent-[#7C3AED]"
+                              style={{
+                                background: `linear-gradient(to right, #7C3AED ${(currentTime / duration) * 100}%, #4d4d4d ${(currentTime / duration) * 100}%)`
+                              }}
+                            />
+                          </div>
+                          <span className="text-[10px] text-white/40 font-medium min-w-[30px]">
+                            {formatTime(duration)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Extra Actions */}
+                      <div className="hidden md:flex items-center gap-3 min-w-[180px] justify-end">
+                        <Volume2 size={18} className="text-white/40" />
+                        <div className="relative w-24 h-1 flex items-center group">
+                          <input 
+                            type="range"
+                            min={0}
+                            max={1}
+                            step={0.01}
+                            value={volume}
+                            onChange={handleVolumeChange}
+                            className="w-full h-1 bg-white/20 rounded-full appearance-none cursor-pointer accent-white"
+                            style={{
+                              background: `linear-gradient(to right, white ${volume * 100}%, #4d4d4d ${volume * 100}%)`
+                            }}
+                          />
+                        </div>
+                        <button 
+                          onClick={() => {
+                            setIsPlaying(false);
+                            setCurrentTrackIdx(null);
+                            if (audioRef.current) {
+                              audioRef.current.pause();
+                              audioRef.current.currentTime = 0;
+                            }
+                          }}
+                          className="p-2 hover:bg-white/10 rounded-full transition-colors text-white/40 hover:text-white cursor-pointer ml-2"
+                          title="Fechar música"
+                        >
+                          <X size={20} />
+                        </button>
                       </div>
                     </div>
-                    <button 
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      className="bg-white text-[#7C3AED] p-3 rounded-full hover:scale-110 transition-transform shadow-lg"
-                    >
-                      {isPlaying ? <PauseCircle size={24} /> : <PlayCircle size={24} />}
-                    </button>
-                  </div>
-
-                  {/* Seek Bar */}
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-[10px] text-white/40 font-bold uppercase tracking-tighter">
-                      <span>{formatTime(currentTime)}</span>
-                      <span>{formatTime(duration)}</span>
-                    </div>
-                    <input 
-                      type="range"
-                      min={0}
-                      max={duration || 0}
-                      value={currentTime}
-                      onChange={handleSeek}
-                      className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#25D366] hover:accent-white transition-all"
-                    />
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </div>
         )}
