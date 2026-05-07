@@ -54,44 +54,50 @@ export function Hero() {
     setFormData(prev => ({ ...prev, [name]: finalValue }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simple alert-based validation for Hero to keep it clean, 
-    // or just rely on HTML5 if preferred, but user wanted strictness.
+    // Validation
     if (formData.nome.length < 3) return alert('Por favor, insira seu nome completo.');
     if (!validateEmail(formData.email)) return alert('Por favor, use um e-mail corporativo.');
-    if (formData.whatsapp.replace(/\D/g, '').length < 10) return alert('Por favor, insira um WhatsApp válido.');
+    const phoneDigits = formData.whatsapp.replace(/\D/g, '');
+    if (phoneDigits.length < 10) return alert('Por favor, insira um WhatsApp válido.');
     if (formData.empresa.length < 2) return alert('Por favor, insira o nome da sua empresa.');
 
-    const message = `*Solicitação de Amostra - LP MLD (Hero)*
----
-*Nome:* ${formData.nome}
-*Empresa:* ${formData.empresa}
-*WhatsApp:* ${formData.whatsapp}
-*E-mail:* ${formData.email}
-*Perfil:* ${formData.perfil}
-*PDVs:* ${formData.pdvs}
----
-Olá, gostaria de receber a amostra do acervo musical.`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/5551980151245?text=${encodedMessage}`;
-    
-    // Push to GTM dataLayer
-    if (typeof window !== 'undefined') {
-      (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({
-        'event': 'form_submit',
-        'form_id': 'lp-musica-hero',
-        'lead_email': formData.email.toLowerCase().trim(),
-        'form_origin': 'landing_page',
-        'page_path': window.location.pathname
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          modalidade: 'Solicitação de Amostra (Hero)',
+          origem: 'Landing Page'
+        }),
       });
-    }
 
-    // Redirect to success page
-    router.push('/sucesso');
+      if (!response.ok) {
+        throw new Error('Erro ao enviar formulário');
+      }
+
+      // Push to GTM dataLayer
+      if (typeof window !== 'undefined') {
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({
+          'event': 'form_submit',
+          'form_id': 'lp-musica-hero',
+          'lead_email': formData.email.toLowerCase().trim(),
+          'form_origin': 'landing_page',
+          'page_path': window.location.pathname
+        });
+      }
+
+      router.push('/sucesso');
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Houve um erro ao enviar sua solicitação. Por favor, tente novamente.');
+    }
   };
 
   return (

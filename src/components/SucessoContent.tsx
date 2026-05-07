@@ -27,18 +27,6 @@ const testimonials = [
 ];
 
 export function SucessoContent() {
-  const [countdown, setCountdown] = useState(30);
-
-  useEffect(() => {
-    if (countdown > 0) {
-      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
-      return () => clearTimeout(timer);
-    } else {
-      // Redirect to WhatsApp Specialist
-      window.location.href = 'https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra no site MLD e gostaria de falar com um especialista.';
-    }
-  }, [countdown]);
-
   return (
     <main className="min-h-screen bg-[#0a0026] text-white selection:bg-[#7C3AED] selection:text-white pb-20">
       {/* Header / Success Banner */}
@@ -80,19 +68,6 @@ export function SucessoContent() {
           >
             Agora, o próximo passo é simples: Nosso time vai analisar o seu perfil e preparar uma seleção de músicas ideal para o seu tipo de evento.
           </motion.p>
-
-          {/* Counter Banner */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-3 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md mb-16"
-          >
-            <Clock className="text-[#7C3AED] animate-pulse" />
-            <span className="text-lg md:text-xl font-semibold">
-              Você será transferido para um atendente em <span className="text-[#7C3AED] text-2xl font-bold">{countdown}s</span>
-            </span>
-          </motion.div>
         </div>
       </section>
 
