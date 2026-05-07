@@ -278,7 +278,7 @@ export function MusicPreview() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               onClick={() => openPlaylist(item)}
-              className="group relative bg-[#2A177A] border border-white/5 p-6 rounded-[16px] min-h-[174px] hover:bg-[#341d96] transition-all cursor-pointer flex flex-col justify-between hover:border-[#7C3AED]/50 shadow-xl"
+              className="group relative bg-[#311b92]/40 border border-white/5 p-6 rounded-[16px] min-h-[174px] hover:bg-[#311b92]/60 transition-all cursor-pointer flex flex-col justify-between hover:border-[#7C3AED]/50 shadow-xl"
             >
               <div className="flex justify-between items-start">
                 <div className="p-3 bg-[#6B21E0] rounded-xl group-hover:bg-[#7C3AED] transition-colors">
