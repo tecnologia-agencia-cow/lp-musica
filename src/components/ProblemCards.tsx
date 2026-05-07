@@ -5,7 +5,7 @@ import { TrendingUp, Gavel, PiggyBank } from 'lucide-react';
 
 const problems = [
   {
-    title: 'A margem que escapa todo mês',
+    title: 'A margem que escapa todo mês.',
     desc: 'Cada PDV novo que você ativa traz um custo recorrente de direitos autorais que come o seu spread. Em 20, 50, 200 lojas, isso vira diferença real no fechamento mensal. Você precisa de um catálogo que escale sem corroer margem.',
     icon: TrendingUp,
   },
@@ -15,7 +15,7 @@ const problems = [
     icon: Gavel,
   },
   {
-    title: 'Em escala, qualquer brecha vira passivo',
+    title: 'Em escala, qualquer brecha vira passivo.',
     desc: 'Em 20+ PDVs, documentação musical incompleta gera autuações que se multiplicam. A responsabilidade reflete em quem opera o serviço — e quem licencia o acervo precisa entregar respaldo formal de ponta a ponta.',
     icon: PiggyBank,
   },
