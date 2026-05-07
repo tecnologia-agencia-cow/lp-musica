@@ -383,15 +383,15 @@ export function MusicPreview() {
                           : 'hover:bg-white/5'
                       }`}
                     >
-                      <div className="text-sm font-medium">
+                      <div className="text-base font-medium">
                         {currentTrackIdx === idx && isPlaying ? (
-                          <div className="flex gap-0.5 items-end h-3 w-4">
+                          <div className="flex gap-0.5 items-end h-4 w-5">
                             {[1, 2, 3].map((i) => (
                               <motion.div
                                 key={i}
-                                animate={{ height: [3, 10, 5, 10, 3] }}
+                                animate={{ height: [4, 14, 7, 14, 4] }}
                                 transition={{ repeat: Infinity, duration: 0.6, delay: i * 0.1 }}
-                                className="w-[3px] bg-[#7C3AED] rounded-full"
+                                className="w-[4px] bg-[#7C3AED] rounded-full"
                               />
                             ))}
                           </div>
@@ -401,18 +401,18 @@ export function MusicPreview() {
                           </span>
                         )}
                         {!isPlaying && currentTrackIdx !== idx && (
-                          <PlayCircle size={14} className="hidden group-hover:block text-white" />
+                          <PlayCircle size={18} className="hidden group-hover:block text-white" />
                         )}
                         {isPlaying && currentTrackIdx === idx && (
-                          <PauseCircle size={14} className="hidden group-hover:block text-white" />
+                          <PauseCircle size={18} className="hidden group-hover:block text-white" />
                         )}
                       </div>
 
                       <div>
-                        <p className={`font-bold text-sm truncate ${currentTrackIdx === idx ? 'text-[#7C3AED]' : 'text-white'}`}>
+                        <p className={`font-bold text-base md:text-lg truncate ${currentTrackIdx === idx ? 'text-[#7C3AED]' : 'text-white'}`}>
                           {track.name}
                         </p>
-                        <p className="text-xs text-white/40 font-medium">Música Livre de Direitos</p>
+                        <p className="text-sm text-white/40 font-medium">Música Livre de Direitos</p>
                       </div>
 
                       <div className="text-right">
