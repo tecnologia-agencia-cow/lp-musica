@@ -25,8 +25,9 @@ const testimonials = [
     author: "Produtora de Eventos"
   }
 ];
-
 export function SucessoContent() {
+  const whatsappLink = "https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra no site MLD e gostaria de falar com um especialista.";
+
   return (
     <main className="min-h-screen bg-[#0a0026] text-white selection:bg-[#7C3AED] selection:text-white pb-20">
       {/* Header / Success Banner */}
@@ -59,7 +60,7 @@ export function SucessoContent() {
           >
             Sua solicitação foi enviada com sucesso.
           </motion.p>
-
+ 
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -68,7 +69,7 @@ export function SucessoContent() {
           >
             Agora, o próximo passo é simples: Nosso time vai analisar o seu perfil e preparar uma seleção de músicas ideal para o seu tipo de evento.
           </motion.p>
-
+ 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -76,7 +77,7 @@ export function SucessoContent() {
             className="flex flex-col items-center gap-6"
           >
             <Link 
-              href="https://wa.me/5551980151245?text=Olá, acabei de solicitar a amostra no site MLD e gostaria de falar com um especialista."
+              href={whatsappLink}
               className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-10 py-4 rounded-full font-bold text-lg transition-all flex items-center gap-3 group shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.5)]"
             >
               <MessageCircle size={24} />
