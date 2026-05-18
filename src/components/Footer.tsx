@@ -22,11 +22,11 @@ export function Footer() {
           <div className="flex flex-col gap-8">
             <div>
               <Image 
-                src="/images/logo-footer.png" 
-                alt="Músicas para Eventos" 
+                src="/images/logo-footer-final.png" 
+                alt="Músicas Livre de Direitos" 
                 width={220} 
                 height={60} 
-                className="h-auto"
+                style={{ height: 'auto' }}
               />
             </div>
             <div className="flex flex-col gap-1 text-gray-500 text-[14px]">
@@ -62,7 +62,7 @@ export function Footer() {
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-6 text-[11px] text-gray-600">
-          <p>© 2024 músicas para eventos. Todos os direitos reservados.</p>
+          <p>© 2024 música livre de direitos. Todos os direitos reservados.</p>
           <div className="text-right flex flex-col gap-1 max-w-[400px]">
             <p className="font-bold text-gray-500">Sub-tagline ROYALTY FREE</p>
             <p>

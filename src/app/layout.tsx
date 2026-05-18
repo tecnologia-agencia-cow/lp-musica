@@ -15,7 +15,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Música para Eventos | Acervo 100% Livre de Direitos",
+  title: "Acervo Musical Royalty-Free para Varejo e Redes | Sem ECAD",
   description: "Música livre de direitos para operações comerciais com 20+ PDVs. Acervo 100% original, sem taxas mensais de direitos autorais.",
 };
 

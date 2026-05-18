@@ -57,11 +57,13 @@ export function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <Image 
-              src="/images/logo-nav.png" 
+              src="/images/logo-nav-final.png" 
               alt="Logo" 
-              width={160} 
-              height={40} 
-              className="h-10 w-auto"
+              width={220} 
+              height={60} 
+              sizes="220px"
+              style={{ height: 'auto' }}
+              priority
             />
           </div>
 
